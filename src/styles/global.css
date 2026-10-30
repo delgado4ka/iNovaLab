@@ -1,13 +1,28 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geologica";
+@import "@fontsource-variable/literata";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    /* Geologica = company voice (headings, UI, body). Literata = the founder's personal voice only. */
+    --font-heading: 'Geologica Variable', sans-serif;
+    --font-sans: 'Geologica Variable', sans-serif;
+    --font-serif: 'Literata Variable', Georgia, serif;
+
+    /* Brand colours (from the logo kit). Gold is a fill colour: never use it as text on light backgrounds. */
+    --color-navy: #0B1F33;
+    --color-gold: #F5A623;
+    --color-pearl: #F4F6F9;
+
+    /* "Band" = the navy blocks (header, hero, contacts, footer). Navy in both themes, per the brand brief. */
+    --color-band: var(--band);
+    --color-band-foreground: var(--band-foreground);
+    --color-band-muted: var(--band-muted);
+    --color-band-border: var(--band-border);
+
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,82 +64,115 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --background: #F4F6F9;
+    --foreground: #0B1F33;
+    --card: #FFFFFF;
+    --card-foreground: #0B1F33;
+    --popover: #FFFFFF;
+    --popover-foreground: #0B1F33;
+    --primary: #F5A623;
+    --primary-foreground: #0B1F33;
+    --secondary: #E2E6EC;
+    --secondary-foreground: #0B1F33;
+    --muted: #E9EDF2;
+    --muted-foreground: #5B6675;
+    --accent: #E2E6EC;
+    --accent-foreground: #0B1F33;
+    --destructive: #C0392B;
+    --border: #D9DEE5;
+    --input: #D9DEE5;
+    --ring: #F5A623;
+    --band: #0B1F33;
+    --band-foreground: #F4F6F9;
+    --band-muted: #A9B5C4;
+    --band-border: #1F3A55;
+    --chart-1: #F5A623;
+    --chart-2: #0B1F33;
+    --chart-3: #5B6675;
+    --chart-4: #A9B5C4;
+    --chart-5: #E2E6EC;
+    --radius: 0.5rem;
+    --sidebar: #FFFFFF;
+    --sidebar-foreground: #0B1F33;
+    --sidebar-primary: #F5A623;
+    --sidebar-primary-foreground: #0B1F33;
+    --sidebar-accent: #E2E6EC;
+    --sidebar-accent-foreground: #0B1F33;
+    --sidebar-border: #D9DEE5;
+    --sidebar-ring: #F5A623;
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --background: #0B1F33;
+    --foreground: #F4F6F9;
+    --card: #112A44;
+    --card-foreground: #F4F6F9;
+    --popover: #112A44;
+    --popover-foreground: #F4F6F9;
+    --primary: #F5A623;
+    --primary-foreground: #0B1F33;
+    --secondary: #17324F;
+    --secondary-foreground: #F4F6F9;
+    --muted: #17324F;
+    --muted-foreground: #A9B5C4;
+    --accent: #17324F;
+    --accent-foreground: #F4F6F9;
+    --destructive: #E5675A;
+    --border: #1F3A55;
+    --input: #26435F;
+    --ring: #F5A623;
+    /* Slightly deeper than the page so bands stay distinct in dark mode. */
+    --band: #071624;
+    --band-foreground: #F4F6F9;
+    --band-muted: #A9B5C4;
+    --band-border: #1A3149;
+    --chart-1: #F5A623;
+    --chart-2: #F4F6F9;
+    --chart-3: #A9B5C4;
+    --chart-4: #5B6675;
+    --chart-5: #26435F;
+    --sidebar: #112A44;
+    --sidebar-foreground: #F4F6F9;
+    --sidebar-primary: #F5A623;
+    --sidebar-primary-foreground: #0B1F33;
+    --sidebar-accent: #17324F;
+    --sidebar-accent-foreground: #F4F6F9;
+    --sidebar-border: #1F3A55;
+    --sidebar-ring: #F5A623;
+}
+
+/* Shared page width + side padding for every section. */
+@utility page-container {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+/* Vertical rhythm for content sections. */
+@utility section-y {
+  @apply py-20 sm:py-28;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
+  html {
+    @apply font-sans scroll-smooth;
+    /* Keeps anchored sections clear of the sticky header. */
+    scroll-padding-top: 5rem;
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
+  h1, h2, h3 {
+    @apply font-heading text-balance;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    @apply font-sans;
-    }
+    scroll-behavior: auto;
+  }
 }

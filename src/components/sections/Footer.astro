@@ -1,0 +1,20 @@
+---
+import Icon from "@/assets/brand/inovalab-icon-reversed.svg";
+import { site } from "@/data/site";
+import { stories } from "@/data/stories";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-band-border bg-band py-10 text-sm text-band-muted">
+  <div class="page-container flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-4">
+      <Icon class="h-8 w-auto" aria-hidden="true" />
+      <p>© {year} {site.name}</p>
+    </div>
+    <ul class="flex flex-wrap gap-x-6 gap-y-2">
+      <li><a href={stories.dzenUrl} class="hover:text-band-foreground" target="_blank" rel="noopener">Дзен</a></li>
+      <li><a href={site.privacyUrl} class="hover:text-band-foreground">Политика конфиденциальности</a></li>
+    </ul>
+  </div>
+</footer>

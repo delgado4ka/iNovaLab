@@ -1,0 +1,40 @@
+---
+import Logo from "@/assets/brand/inovalab-logo-reversed.svg";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import MobileNav from "@/components/interactive/MobileNav";
+import ThemeToggle from "@/components/interactive/ThemeToggle";
+import { site } from "@/data/site";
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-band-border bg-band text-band-foreground"
+>
+  <div class="page-container flex h-16 items-center gap-8">
+    <a href="#top" class="shrink-0 rounded-sm" aria-label={`${site.name}, в начало страницы`}>
+      <Logo class="h-6 w-auto sm:h-7" aria-hidden="true" />
+    </a>
+
+    <nav class="ml-auto hidden lg:block" aria-label="Разделы сайта">
+      <ul class="flex gap-7 text-sm">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a href={item.href} class="text-band-muted transition-colors hover:text-band-foreground">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-1 lg:ml-0">
+      <ThemeToggle client:load />
+      <a href={site.cta.href} class={cn(buttonVariants({ size: "lg", className: "ml-2 hidden sm:inline-flex" }))}>{site.cta.label}</a>
+      <div class="lg:hidden">
+        <MobileNav client:load items={site.nav} cta={site.cta} />
+      </div>
+    </div>
+  </div>
+</header>

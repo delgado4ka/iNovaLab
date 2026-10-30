@@ -1,10 +1,123 @@
 ---
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { about } from "@/data/about";
 import { site } from "@/data/site";
+
+// PLACEHOLDER until the founder's photo arrives: initials stand in for the portrait.
+const initials = site.founder.name
+  .split(" ")
+  .map((part) => part[0])
+  .join("");
 ---
 
-<section class="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 py-32 text-center">
-  <h1 class="font-heading text-5xl font-semibold tracking-tight">{site.name}</h1>
-  <p class="max-w-xl text-lg text-muted-foreground">{site.description}</p>
-  <Button size="lg">Get in touch</Button>
+<section id="top" class="relative overflow-hidden bg-band text-band-foreground">
+  <div class="page-container grid gap-14 pt-14 pb-20 sm:pt-20 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pt-24 lg:pb-28">
+    <div class="relative z-10 lg:col-span-7">
+      <h1 class="max-w-[20ch] text-[2.25rem] leading-[1.1] font-semibold tracking-tight sm:text-5xl lg:text-[3.4rem]">
+        {about.headline}
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-band-muted">{about.lead}</p>
+
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href={site.cta.href} class={cn(buttonVariants({ size: "xl" }))}>{site.cta.label}</a>
+        <a href="#services" class={cn(buttonVariants({ size: "xl", variant: "band" }))}>Посмотреть услуги</a>
+      </div>
+
+      <ul class="mt-10 flex flex-col gap-2.5 text-sm text-band-muted sm:flex-row sm:flex-wrap sm:gap-x-7">
+        {
+          about.facts.map((fact) => (
+            <li class="flex items-center gap-2.5">
+              <span class="size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+              {fact}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <figure class="relative mx-auto w-full max-w-sm lg:col-span-5 lg:mr-0">
+      <!--
+        The brand's "trajectory": a dotted line rising to the gold nova dot, as in the logo's i.
+        It is drawn once on load; reduced-motion users get the final state.
+      -->
+      <svg
+        class="pointer-events-none absolute z-10 -bottom-16 -left-[70%] h-[125%] w-[175%] text-band-foreground/35"
+        viewBox="0 0 700 625"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <mask id="trajectory-mask">
+            <path
+              class="trajectory-reveal"
+              d="M0 610 C 170 604, 236 500, 244 360 S 248 120, 262 66"
+              stroke="white"
+              stroke-width="12"
+              pathLength="1"
+            />
+          </mask>
+        </defs>
+        <path
+          d="M0 610 C 170 604, 236 500, 244 360 S 248 120, 262 66"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-dasharray="0 13"
+          mask="url(#trajectory-mask)"
+        />
+        <circle class="nova" cx="264" cy="50" r="11" fill="#F5A623" />
+      </svg>
+
+      <div
+        class="relative grid aspect-[4/5] place-items-center overflow-hidden rounded-2xl border border-band-border bg-[#12304D] dark:bg-[#0D2238]"
+      >
+        <span class="font-serif text-7xl text-band-foreground/30" aria-hidden="true">{initials}</span>
+        <span class="absolute bottom-4 text-xs text-band-muted">Фото основателя</span>
+      </div>
+      <figcaption class="relative mt-5">
+        <span class="block font-serif text-2xl">{site.founder.name}</span>
+        <span class="mt-1 block text-sm leading-relaxed text-band-muted">Основатель iNovaLab. {site.founder.role}</span>
+      </figcaption>
+    </figure>
+  </div>
 </section>
+
+<style>
+  .trajectory-reveal {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.2s forwards;
+  }
+  .nova {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: nova 0.6s ease-out 1.85s forwards;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes nova {
+    from {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trajectory-reveal {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+    .nova {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>

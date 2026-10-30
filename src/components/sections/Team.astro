@@ -1,0 +1,29 @@
+---
+import { site } from "@/data/site";
+import { team } from "@/data/team";
+---
+
+<section id="team" class="section-y">
+  <div class="page-container grid gap-10 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-5">
+      <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">{team.title}</h2>
+      <p class="mt-5 text-lg leading-relaxed text-muted-foreground">{team.intro}</p>
+      <p class="mt-8 font-serif text-xl leading-snug italic">{team.signature}</p>
+      <p class="mt-2 text-sm text-muted-foreground">{site.founder.name}</p>
+    </div>
+
+    <dl class="divide-y divide-border border-y border-border lg:col-span-7">
+      {
+        team.roles.map((member) => (
+          <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-6">
+            <dt class="font-heading text-lg font-medium">
+              {member.role}
+              {member.name && <span class="block text-sm font-normal text-muted-foreground">{member.name}</span>}
+            </dt>
+            <dd class="leading-relaxed text-muted-foreground">{member.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
