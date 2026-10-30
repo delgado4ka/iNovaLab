@@ -8,7 +8,11 @@ interface Props {
 }
 
 const { title = site.title, description = site.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, site.url);
+// Non-root base = GitHub Pages demo: prefix local assets and keep it out of search.
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const isDemo = base !== "";
+const asset = (path: string) => `${base}${path}`;
+const canonical = new URL(Astro.url.pathname.slice(base.length) || "/", site.url);
 const ogImage = new URL("/og.png", site.url);
 ---
 
@@ -30,11 +34,12 @@ const ogImage = new URL("/og.png", site.url);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
+    {isDemo && <meta name="robots" content="noindex, nofollow" />}
 
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href={asset("/favicon.ico")} sizes="any" />
+    <link rel="icon" href={asset("/favicon.svg")} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={asset("/apple-touch-icon.png")} />
+    <link rel="manifest" href={asset("/site.webmanifest")} />
     <meta name="theme-color" content="#0B1F33" />
 
     <meta property="og:type" content="website" />
